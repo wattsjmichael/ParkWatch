@@ -21,7 +21,7 @@ namespace ParkWatchApi.Controllers
 
     // GET api/NatlParks
     [HttpGet]
-    public ActionResult<IEnumerable<NatlPark>> Get(string natlParkState, string natlParkCity, int natlParkCampingSpots, bool natlParkIsOpen)
+    public ActionResult<IEnumerable<NatlPark>> Get(string natlParkState, string natlParkCity, int natlParkCampingSpots, bool isOpenNatl)
     {
       var query = _db.NatlParks.AsQueryable();
       if (natlParkState != null)
@@ -36,9 +36,9 @@ namespace ParkWatchApi.Controllers
       {
         query = query.Where(entry => entry.NatlParkCampingSpots == natlParkCampingSpots);
       }
-      if (natlParkIsOpen != true)
+      if (isOpenNatl == false || isOpenNatl == true)
       {
-        query = query.Where(entry => entry.NatlParkCampingSpots == natlParkCampingSpots);
+        query = query.Where(entry => entry.IsOpenNatl == isOpenNatl);
       }
       return query.ToList();
     }
