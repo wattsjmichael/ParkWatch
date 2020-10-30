@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ParkWatchApi.Controllers
 {
-[Route("api/[controller]")]
+  [Route("api/[controller]")]
   [ApiController]
   public class NatlParksController : ControllerBase
   {
@@ -21,9 +21,26 @@ namespace ParkWatchApi.Controllers
 
     // GET api/NatlParks
     [HttpGet]
-    public ActionResult<IEnumerable<NatlPark>> Get()
+    public ActionResult<IEnumerable<NatlPark>> Get(string natlParkState, string natlParkCity, int natlParkCampingSpots, bool natlParkIsOpen)
     {
-      return _db.NatlParks.ToList();
+      var query = _db.NatlParks.AsQueryable();
+      if (natlParkState != null)
+      {
+        query = query.Where(entry => entry.NatlParkState == natlParkState);
+      }
+      if (natlParkCity != null)
+      {
+        query = query.Where(entry => entry.NatlParkCity == natlParkCity);
+      }
+      if (natlParkCampingSpots != 0)
+      {
+        query = query.Where(entry => entry.NatlParkCampingSpots == natlParkCampingSpots);
+      }
+      if (natlParkIsOpen != true)
+      {
+        query = query.Where(entry => entry.NatlParkCampingSpots == natlParkCampingSpots);
+      }
+      return query.ToList();
     }
 
     // POST api/natlparks
@@ -38,12 +55,12 @@ namespace ParkWatchApi.Controllers
     [HttpGet("{id}")]
     public ActionResult<NatlPark> Get(int id)
     {
-      return _db.NatlParks.FirstOrDefault(entry=>entry.NatlParkId == id);
+      return _db.NatlParks.FirstOrDefault(entry => entry.NatlParkId == id);
     }
 
     //PUT api/natlparks/3
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] NatlPark natlPark )
+    public void Put(int id, [FromBody] NatlPark natlPark)
     {
       natlPark.NatlParkId = id;
       _db.Entry(natlPark).State = EntityState.Modified;
@@ -53,7 +70,7 @@ namespace ParkWatchApi.Controllers
     //Delete api/natlparks/2
     public void Delete(int id)
     {
-      var natlParkToDelete = _db.NatlParks.FirstOrDefault(entry=>entry.NatlParkId == id);
+      var natlParkToDelete = _db.NatlParks.FirstOrDefault(entry => entry.NatlParkId == id);
       _db.NatlParks.Remove(natlParkToDelete);
       _db.SaveChanges();
     }
