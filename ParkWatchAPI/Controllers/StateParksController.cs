@@ -5,6 +5,7 @@ using ParkWatchApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using ParkWatchApi.Helpers;
 
 namespace ParkWatchApi.Controllers
 {
@@ -13,16 +14,21 @@ namespace ParkWatchApi.Controllers
   public class StateParksController : ControllerBase
   {
     private ParkWatchApiContext _db;
+    private readonly IUriService uriService;
 
-    public StateParksController(ParkWatchApiContext db)
+    public StateParksController(ParkWatchApiContext db, IUriService uriService)
     {
       _db = db;
+      this.uriService = uriService;
     }
 
     // GET api/stateparks
     [HttpGet]
-    public ActionResult<IEnumerable<StatePark>> Get(string stateParkState, string stateParkCity, int? stateParkCampingSpots, bool? isOpenState )
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter, string stateParkState, string stateParkCity, int? stateParkCampingSpots, bool? isOpenState)
     {
+      var route = Request.Path.Value;
+      var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
       var query = _db.StateParks.AsQueryable();
       if (stateParkState != null)
       {
@@ -40,7 +46,11 @@ namespace ParkWatchApi.Controllers
       {
         query = query.Where(entry => entry.IsOpenState == isOpenState);
       }
-      return query.ToList();
+      query = query.Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+      .Take(validFilter.PageSize);
+      var totalRecords = await _db.StateParks.CountAsync();
+      var pagedResponse = PaginationHelper.CreatePagedReponse<StatePark>(query.ToList(), validFilter, totalRecords, uriService, route);
+      return Ok(pagedResponse);
     }
 
 
