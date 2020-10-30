@@ -53,9 +53,10 @@ namespace ParkWatchApi.Controllers
 
     //GET by Id Api/natlparks/2
     [HttpGet("{id}")]
-    public ActionResult<NatlPark> Get(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-      return _db.NatlParks.FirstOrDefault(entry => entry.NatlParkId == id);
+      var natlPark = await _db.NatlParks.Where(x=>x.NatlParkId == id).FirstOrDefaultAsync();
+      return Ok(new Response<NatlPark>(natlPark));
     }
 
     //PUT api/natlparks/3
