@@ -21,10 +21,28 @@ namespace ParkWatchApi.Controllers
 
     // GET api/stateparks
     [HttpGet]
-    public ActionResult<IEnumerable<StatePark>> Get()
+    public ActionResult<IEnumerable<StatePark>> Get(string stateParkState, string stateParkCity, int? stateParkCampingSpots, bool? isOpenState )
     {
-      return _db.StateParks.ToList();
+      var query = _db.StateParks.AsQueryable();
+      if (stateParkState != null)
+      {
+        query = query.Where(entry => entry.StateParkState == stateParkState);
+      }
+      if (stateParkCity != null)
+      {
+        query = query.Where(entry => entry.StateParkCity == stateParkCity);
+      }
+      if (stateParkCampingSpots != null)
+      {
+        query = query.Where(entry => entry.StateParkCampingSpots == stateParkCampingSpots);
+      }
+      if (isOpenState != null)
+      {
+        query = query.Where(entry => entry.IsOpenState == isOpenState);
+      }
+      return query.ToList();
     }
+
 
     // POST api/stateparks
     [HttpPost]
