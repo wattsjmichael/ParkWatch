@@ -9,7 +9,7 @@ namespace ParkWatchApi.Models
 
         public int StateParkCampingSpots { get; set; }
 
-        public bool IsOpenState {get; set;}
+        public bool? IsOpenState {get; set;}
         
 
         
