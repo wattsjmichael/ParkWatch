@@ -40,5 +40,13 @@ namespace ParkWatchApi.Controllers
     {
       return _db.StateParks.FirstOrDefault(entry=>entry.StateParkId == id);
     }
+    //PUT api/statepark/2
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody] StatePark statePark)
+    {
+      statePark.StateParkId = id;
+      _db.Entry(statePark).State = EntityState.Modified;
+      _db.SaveChanges();
+    }
   }
 }

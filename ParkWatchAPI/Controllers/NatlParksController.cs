@@ -34,11 +34,20 @@ namespace ParkWatchApi.Controllers
       _db.SaveChanges();
     }
 
-    //Get Api/natlparks/2
+    //GET by Id Api/natlparks/2
     [HttpGet("{id}")]
     public ActionResult<NatlPark> Get(int id)
     {
       return _db.NatlParks.FirstOrDefault(entry=>entry.NatlParkId == id);
+    }
+
+    //PUT api/natlpark/3
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody] NatlPark natlPark )
+    {
+      natlPark.NatlParkId = id;
+      _db.Entry(natlPark).State = EntityState.Modified;
+      _db.SaveChanges();
     }
   }
 }
