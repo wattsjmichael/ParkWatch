@@ -53,10 +53,11 @@ namespace ParkWatchApi.Controllers
     }
 
     //Get Api/stateparks/2
-    [HttpGet("{id}")]
-    public ActionResult<StatePark> Get(int id)
+      [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
     {
-      return _db.StateParks.FirstOrDefault(entry=>entry.StateParkId == id);
+      var statePark = await _db.StateParks.Where(x=>x.StateParkId == id).FirstOrDefaultAsync();
+      return Ok(new Response<StatePark>(statePark));
     }
     //PUT api/stateparks/2
     [HttpPut("{id}")]
