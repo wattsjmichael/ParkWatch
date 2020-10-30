@@ -20,7 +20,7 @@ namespace ParkWatchApi.Models
        new StatePark { StateParkId = 2, StateParkName = "Cascadia Park", StateParkCity = "Vancouver", StateParkState = "Washington", StateParkCampingSpots = 4, IsOpenState = true },
        new StatePark { StateParkId = 3, StateParkName = "Seaside State Park", StateParkCity = "Seaside", StateParkState = "Oregon", StateParkCampingSpots = 0, IsOpenState = false },
        new StatePark { StateParkId = 4, StateParkName = "Mt Hood State Park", StateParkCity = "Governement Camp", StateParkState = "Oregon", StateParkCampingSpots = 6, IsOpenState = true },
-       new StatePark { StateParkId = 1, StateParkName = "Bellingham State Park", StateParkCity = "Bellingham", StateParkState = "Washington", StateParkCampingSpots = 15, IsOpenState = true }
+       new StatePark { StateParkId = 5, StateParkName = "Bellingham State Park", StateParkCity = "Bellingham", StateParkState = "Washington", StateParkCampingSpots = 15, IsOpenState = true }
       );
       builder.Entity<NatlPark>()
       .HasData(
