@@ -40,12 +40,21 @@ namespace ParkWatchApi.Controllers
     {
       return _db.StateParks.FirstOrDefault(entry=>entry.StateParkId == id);
     }
-    //PUT api/statepark/2
+    //PUT api/stateparks/2
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] StatePark statePark)
     {
       statePark.StateParkId = id;
       _db.Entry(statePark).State = EntityState.Modified;
+      _db.SaveChanges();
+    }
+
+    //DELETE api/stateparks/3
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
+      var stateParkToDelete = _db.StateParks.FirstOrDefault(entry=>entry.StateParkId == id);
+      _db.StateParks.Remove(stateParkToDelete);
       _db.SaveChanges();
     }
   }
