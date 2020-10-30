@@ -10,5 +10,6 @@ namespace ParkWatchApi.Models
         }
 
         public DbSet<StatePark> StateParks { get; set; }
+        public DbSet<NatlPark> NatlParks { get; set ;}
     }
 }
