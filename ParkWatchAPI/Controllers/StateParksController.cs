@@ -75,5 +75,13 @@ namespace ParkWatchApi.Controllers
       _db.StateParks.Remove(stateParkToDelete);
       _db.SaveChanges();
     }
+    //Random api/stateparks/Random
+    [HttpGet("random")]
+    public ActionResult<StatePark> Get()
+    {
+      int count = _db.StateParks.Count();
+      int index = new Random().Next(count);
+      return _db.StateParks.Skip(index).FirstOrDefault();
+    }
   }
 }
