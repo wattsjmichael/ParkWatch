@@ -74,5 +74,14 @@ namespace ParkWatchApi.Controllers
       _db.NatlParks.Remove(natlParkToDelete);
       _db.SaveChanges();
     }
+
+    //Get api/natlparks/random
+    [HttpGet("random")]
+    public ActionResult<NatlPark> Get()
+    {
+    int count = _db.NatlParks.Count();
+    int index = new Random().Next(count);
+    return _db.NatlParks.Skip(index).FirstOrDefault();
+    }
   }
 }
