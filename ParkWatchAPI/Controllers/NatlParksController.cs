@@ -5,6 +5,7 @@ using ParkWatchApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using ParkWatchApi.Helpers;
 
 namespace ParkWatchApi.Controllers
 {
@@ -13,16 +14,20 @@ namespace ParkWatchApi.Controllers
   public class NatlParksController : ControllerBase
   {
     private ParkWatchApiContext _db;
+    private readonly IUriService uriService;
 
-    public NatlParksController(ParkWatchApiContext db)
+    public NatlParksController(ParkWatchApiContext db, IUriService uriService)
     {
       _db = db;
+      this.uriService = uriService;
     }
 
     // GET api/NatlParks
     [HttpGet]
-    public ActionResult<IEnumerable<NatlPark>> Get(string natlParkState, string natlParkCity, int? natlParkCampingSpots, bool? isOpenNatl )
+    public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter, string natlParkState, string natlParkCity, int? natlParkCampingSpots, bool? isOpenNatl)
     {
+      var route = Request.Path.Value;
+      var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
       var query = _db.NatlParks.AsQueryable();
       if (natlParkState != null)
       {
@@ -40,7 +45,11 @@ namespace ParkWatchApi.Controllers
       {
         query = query.Where(entry => entry.IsOpenNatl == isOpenNatl);
       }
-      return query.ToList();
+      query = query.Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+      .Take(validFilter.PageSize);
+      var totalRecords = await _db.NatlParks.CountAsync();
+      var pagedResponse = PaginationHelper.CreatePagedReponse<NatlPark>(query.ToList(), validFilter, totalRecords, uriService, route);
+      return Ok(pagedResponse);
     }
 
     // POST api/natlparks
@@ -55,7 +64,7 @@ namespace ParkWatchApi.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-      var natlPark = await _db.NatlParks.Where(x=>x.NatlParkId == id).FirstOrDefaultAsync();
+      var natlPark = await _db.NatlParks.Where(x => x.NatlParkId == id).FirstOrDefaultAsync();
       return Ok(new Response<NatlPark>(natlPark));
     }
 
@@ -80,9 +89,9 @@ namespace ParkWatchApi.Controllers
     [HttpGet("random")]
     public ActionResult<NatlPark> Get()
     {
-    int count = _db.NatlParks.Count();
-    int index = new Random().Next(count);
-    return _db.NatlParks.Skip(index).FirstOrDefault();
+      int count = _db.NatlParks.Count();
+      int index = new Random().Next(count);
+      return _db.NatlParks.Skip(index).FirstOrDefault();
     }
   }
 }
