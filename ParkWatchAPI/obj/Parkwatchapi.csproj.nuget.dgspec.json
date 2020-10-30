@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\Parkwatchapi\\Parkwatchapi.csproj": {}
+    "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\ParkWatchApi\\ParkWatchApi.csproj": {}
   },
   "projects": {
-    "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\Parkwatchapi\\Parkwatchapi.csproj": {
+    "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\ParkWatchApi\\ParkWatchApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\Parkwatchapi\\Parkwatchapi.csproj",
-        "projectName": "Parkwatchapi",
-        "projectPath": "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\Parkwatchapi\\Parkwatchapi.csproj",
+        "projectUniqueName": "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\ParkWatchApi\\ParkWatchApi.csproj",
+        "projectName": "ParkWatchApi",
+        "projectPath": "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\ParkWatchApi\\ParkWatchApi.csproj",
         "packagesPath": "C:\\Users\\WATTS\\.nuget\\packages\\",
-        "outputPath": "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\Parkwatchapi\\obj\\",
+        "outputPath": "K:\\Epicodus-Projects\\CSharp\\ParkWatch.Solution\\ParkWatchApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

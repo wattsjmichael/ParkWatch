@@ -4,8 +4,8 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:65182",
-      "sslPort": 44303
+      "applicationUrl": "http://localhost:62306",
+      "sslPort": 44362
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Parkwatchapi": {
+    "ParkWatchApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",
