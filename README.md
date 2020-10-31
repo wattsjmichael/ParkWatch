@@ -6,7 +6,7 @@
     <!-- Project Avatar/Logo -->
     <br>
     <a>
-        <img src="https://mystickermania.com/cdn/stickers/travel/previews-256x256.png">
+        <img src="https://www.eugene-or.gov/ImageRepository/Document?documentID=43216">
     </a>
     <p>
       ___________________________
@@ -364,7 +364,9 @@ SOFTWARE.
 
 [Guidance on Paging in ASP.NET Core Web API](https://www.codewithmukesh.com/blog/pagination-in-aspnet-core-webapi/)
 
-All the Googles and Stack Overflows, who knew bools could be nullable! 
+All the Googles and Stack Overflows, who knew bools could be nullable!
+
+[City of Eugene Oregon for the awesome logo!](https://www.eugene-or.gov/2411/Park-Watch---Report-A-Safety-Issue)
 
 ---
 <center><a href="#">Return to Top</a></center>
