@@ -55,6 +55,7 @@ An API that functions as an archive for trips to State and National Parks. It ut
 - [MySQL](https://dev.mysql.com/)
 - [Entity Framework Core 2.2.6](https://docs.microsoft.com/en-us/ef/core/)
 - [Postman](postman.com)
+- [Swagger](https://swagger.io/tools/swagger-ui/)
 
 ---
 
@@ -80,6 +81,11 @@ Enter the command `dotnet tool install -g dotnet-script` in Terminal for macOS o
 #### Install Postman
 
 (Optional, but you really should!) [Download and install Postman](https://www.postman.com/downloads/).
+
+### Install Swagger
+
+Enter command `dotnet add package Swashbuckle.AspNetCore.Swagger --version 5.0.0-rc3` in your terminal and follow this [tutorial](https://www.c-sharpcorner.com/article/swagger-for-asp-net-core-api-2-2/). 
+
 
 ### Code Editor
 
@@ -147,6 +153,10 @@ To view or edit the code, you will need an code editor or text editor. The popul
 ## 🛰️ API Documentation
 
 Explore the API endpoints in Postman or a browser.
+
+### Using Swagger Documentation
+
+To explore the ParkWatchApI with Swagger, launch the project using `dotnet run` with the Terminal, and input the following URL into your browser: `http://localhost:5000/swagger/index.html`
 
 ### Note on Pagination
 
