@@ -24,7 +24,6 @@ namespace ParkWatchApi.Controllers
 
     // GET api/stateparks
     [HttpGet]
-    [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter, string stateParkState, string stateParkCity, int? stateParkCampingSpots, bool? isOpenState)
     {
       var route = Request.Path.Value;
