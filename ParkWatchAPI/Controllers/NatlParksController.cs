@@ -78,6 +78,7 @@ namespace ParkWatchApi.Controllers
     }
 
     //Delete api/natlparks/2
+    [HttpDelete("{id}")]
     public void Delete(int id)
     {
       var natlParkToDelete = _db.NatlParks.FirstOrDefault(entry => entry.NatlParkId == id);
